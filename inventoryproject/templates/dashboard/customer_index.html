@@ -1,0 +1,60 @@
+{% load crispy_forms_tags %}
+<div>
+    <div class="row mt-4">
+        <!-- Form Section -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Make Request
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <input class="btn btn-info btn-block" type="submit" value="Add a Product">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Records Section -->
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    Product Records
+                </div>
+                <div class="card-body">
+                    <table class="table bg-white">
+                        <thead class="bg-info text-white">
+                            <tr>
+                                <th scope="col">Name</th>
+<!--                                <th scope="col">Specification</th>-->
+<!--                                <th scope="col">Supplier</th>-->
+<!--                                <th scope="col">Make</th>-->
+<!--                                <th scope="col">Package Size</th>-->
+<!--                                <th scope="col">UOM</th>-->
+<!--                                <th scope="col">Identity</th>-->
+<!--                                <th scope="col">TOL Percentage</th>-->
+                                <th scope="col">Username</th>
+                                <th scope="col">Departments</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                                {% for item in products %}
+                                    {% if item.customer == user or item.customer.profile.department == user.profile.department%}
+                                        <tr>
+                                            <td>{{ item.name }}</td>
+                                              <td>{{ item.customer.username }}</td>
+                                            <td>{{ item.customer.profile.department }}</td>
+                                            <td><a class="btn btn-danger btn-sm ml-2" href="{% url 'dashboard-product-add-assembly' item.id %}">Add Assembly</a></td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

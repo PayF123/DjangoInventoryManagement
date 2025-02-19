@@ -1,0 +1,52 @@
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="card text-center shadow-sm" style="border-radius: 10px;">
+                <div class="card-body" style="background-color: #f8f9fa;">
+                    <h5 class="card-title">Products</h5>
+                    <p class="card-text" id="product-count" style="font-size: 3rem; font-weight: bold;"> {{products_count}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card text-center shadow-sm" style="border-radius: 10px;">
+                <div class="card-body" style="background-color: #f8f9fa;">
+                    <h5 class="card-title">Staffs</h5>
+                    <p class="card-text" id="staff-count" style="font-size: 3rem; font-weight: bold;">{{customers_count}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card text-center shadow-sm" style="border-radius: 10px;">
+                <div class="card-body" style="background-color: #f8f9fa;">
+                    <h5 class="card-title">Orders</h5>
+                    <p class="card-text" id="order-count" style="font-size: 3rem; font-weight: bold;">{{order_count}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ul class="nav nav-tabs my-3">
+    <li class="nav-item">
+        <a class="nav-link active" data-bs-toggle="tab" href="{% url 'dashboard-product' %}">Products</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="{% url 'dashboard-customers' %}">Staffs</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="{% url 'dashboard-order' %}">Orders</a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div id="products" class="tab-pane fade show active">
+        <!-- Product Table -->
+    </div>
+    <div id="staffs" class="tab-pane fade">
+        <!-- Staff Table -->
+    </div>
+    <div id="orders" class="tab-pane fade">
+        <!-- Orders Table -->
+    </div>
+</div>

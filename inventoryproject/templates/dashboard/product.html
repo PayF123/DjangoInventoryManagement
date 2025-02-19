@@ -1,0 +1,66 @@
+{% extends 'partials/base.html' %}
+{% block title %}Product Page{% endblock %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+{% include 'partials/topside.html' %}
+<div class="container mt-4">
+    <div class="row">
+        <!-- Add New Product Section -->
+        <div class="col-md-4">
+            <div class="card my-4">
+                <div class="card-header bg-primary text-white">
+                    Add New Product
+                </div>
+                <div class="card-body">
+                    <form method="POST" class="form">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="btn btn-success mt-2">Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product List Section -->
+        <div class="col-md-8">
+            <div class="card my-4">
+                <div class="card-header bg-primary text-white">
+                    Product List
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Name</th>
+                                <th>Department</th>
+                                <th>Username</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in products %}
+                            <tr>
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.customer.profile.department|default:"admin" }}</td>
+                                <td>{{ item.customer.username }}</td>
+                                <td>
+                                    <a class="btn btn-sm btn-warning" href="{% url 'dashboard-product-update' item.id %}">Update</a>
+                                    <a class="btn btn-sm btn-danger" href="{% url 'dashboard-product-delete' item.id %}">Delete</a>
+                                    <a class="btn btn-sm btn-primary" href="{% url 'dashboard-product-add-assembly' item.id %}">Add Assembly</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+
