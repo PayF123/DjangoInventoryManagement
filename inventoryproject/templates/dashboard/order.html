@@ -1,0 +1,53 @@
+{% extends 'partials/base.html' %}
+{% block title %}Order Page{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% include 'partials/topside.html' %}
+
+
+
+
+
+    <div class="row my-4">
+    <div class="col-md-4">
+            <div class="card my-4">
+                <div class="card-header bg-primary text-white">
+                    Add New Order
+                </div>
+                <div class="card-body">
+                    <form method="POST" class="form">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="btn btn-success mt-2">Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <div class="col-md-8">
+        <table class="table table-hover table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Ordered by</th>
+                </tr>
+            </thead>
+            <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td>{{ order.name }}</td>
+                            <td>{{ order.order_quantity }}</td>
+                            <td>{{ order.customer.username }}</td>
+                        </tr>
+        {% endfor %}
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}

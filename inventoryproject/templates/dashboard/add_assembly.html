@@ -1,0 +1,24 @@
+{% extends 'partials/base.html' %}
+{% block title %}Add Assembly{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="row my-4">
+    <div class="col-md-6 offset-md-3">
+        <div class="border p-3 bg-white">
+            <h4>Add Assembly for product {{ item.name }}</h4>
+            <hr>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                 <input class="btn btn-success" type="submit" value="Add">
+            </form>
+            <a class="btn btn-success" href="{% url 'dashboard-product-view-assembly' item.id %}">View Assembly</a>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

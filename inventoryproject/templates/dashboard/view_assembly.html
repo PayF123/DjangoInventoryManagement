@@ -1,0 +1,39 @@
+{% extends 'partials/base.html' %}
+{% block title %}View Assembly{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+  <div class="row my-4">
+      <div class="col-md-6 offset-md-3">
+          <div class="border p-3 bg-white">
+              <div class="card-header bg-primary text-white">
+                    Assemblies for product {{ item.name }}
+              </div>
+              <hr>
+              <table class="table table-hover table-bordered">
+              <thead class="table-dark">
+                  <tr>
+                      <th >Name</th>
+                       <th >Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+
+                  {% for assembly in assemblies %}
+
+                      {% if assembly.product.id == id %}
+                        <tr>
+                          <td>{{ assembly.name }}</td>
+                            <td><a class="btn btn-danger btn-sm ml-2" href="{% url 'dashboard-product-assembly-add-component' assembly.id %}">Add Component</a></td>
+                        </tr>
+                      {% endif %}
+                  {% endfor %}
+
+              </tbody>
+          </table>
+          </div>
+      </div>
+  </div>
+
+{% endblock %}

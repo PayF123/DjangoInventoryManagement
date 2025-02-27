@@ -1,0 +1,57 @@
+{% extends 'partials/base.html' %}
+{% block title %}View Components{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="row my-4">
+    <div class="col-md-12 offset-md-0">
+        <div class="border p-3 bg-white">
+            <div class="card-header bg-primary text-white">
+                    Components for {{ assembly.name }} in product {{ item.name }}
+            </div>
+
+            <hr>
+                <table class="table table-hover table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Description</th>
+                            <th >Specification</th>
+                            <th>Supplier</th>
+                            <th>Make</th>
+                            <th>Package_Size</th>
+                            <th>Quantity</th>
+                            <th>UOM</th>
+                            <th>Identity</th>
+                            <th>Tol Percentage</th>
+                            <th>Quantities in inventory</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                  {% for component in components %}
+
+                      {% if component.assembly.id == id %}
+                        <tr>
+                          <td>{{ component.description }}</td>
+                            <td>{{ component.specification }}</td>
+                            <td>{{ component.supplier }}</td>
+                            <td>{{ component.make }}</td>
+                            <td>{{ component.package_size }}</td>
+                            <td>{{ component.quantity }}</td>
+                            <td>{{ component.uom }}</td>
+                            <td>{{ component.identity }}</td>
+                            <td>{{ component.tol_percentage }}</td>
+                            <td>{{ component.inventory_qty }}</td>
+                        </tr>
+                      {% endif %}
+                  {% endfor %}
+
+              </tbody>
+                </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
